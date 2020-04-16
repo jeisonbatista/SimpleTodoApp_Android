@@ -8,6 +8,7 @@ public class Tarefa implements Serializable {
     private String titulo;
     private String descricao;
     private boolean urgente;
+    private boolean finalizada;
 
     public Long getId() {
         return id;
@@ -41,8 +42,21 @@ public class Tarefa implements Serializable {
         this.urgente = urgente;
     }
 
+    public boolean isFinalizada() {
+        return finalizada;
+    }
+
+    public void setFinalizada(boolean finalizada) {
+        this.finalizada = finalizada;
+    }
+
     @Override
     public String toString() {
-        return id + " - " + titulo;
+        StringBuilder sb = new StringBuilder();
+        sb.append(titulo);
+        if(isUrgente())
+            sb.append(" (Urgente)");
+
+        return sb.toString();
     }
 }

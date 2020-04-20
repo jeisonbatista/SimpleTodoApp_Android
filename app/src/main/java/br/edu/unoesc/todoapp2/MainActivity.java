@@ -24,6 +24,7 @@ import br.edu.unoesc.todoapp2.entidades.Tarefa;
 public class MainActivity extends AppCompatActivity {
 
     private Button btnAdd;
+    private Button btnVerFinalizada;
     private ListView lstTarefas;
 
     @Override
@@ -33,12 +34,21 @@ public class MainActivity extends AppCompatActivity {
 
         lstTarefas = findViewById(R.id.lstTarefas);
         btnAdd = findViewById(R.id.btnAdd);
+        btnVerFinalizada = findViewById(R.id.btnVerFinalizadas);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent abreCadastro = new Intent(MainActivity.this, NovaTarefaActivity.class);
                 startActivity(abreCadastro);
+            }
+        });
+
+        btnVerFinalizada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent abreFinalizadas = new Intent(MainActivity.this, FinalizadasActivity.class);
+                startActivity(abreFinalizadas);
             }
         });
 

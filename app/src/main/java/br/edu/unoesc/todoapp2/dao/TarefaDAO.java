@@ -84,4 +84,22 @@ public class TarefaDAO extends SQLiteOpenHelper {
         tarefa.setFinalizada(Boolean.TRUE);
         editarTarefa(tarefa);
     }
+
+    public List<Tarefa> retonarTarefasFinalizadas() {
+        String sql = "select * from Tarefa where FINALIZADA = 1 order by URGENTE desc";
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery(sql, null);
+
+        List<Tarefa> tarefas = new ArrayList<Tarefa>();
+        while (c.moveToNext()){
+            Tarefa tarefa = new Tarefa();
+            tarefa.setId(c.getLong(c.getColumnIndex("ID")));
+            tarefa.setTitulo(c.getString(c.getColumnIndex("TITULO")));
+            tarefa.setDescricao(c.getString(c.getColumnIndex("DESCRIACAO")));
+            tarefa.setUrgente(c.getString(c.getColumnIndex("URGENTE")).equals("0") ? false : true);
+            tarefas.add(tarefa);
+        }
+        c.close();
+        return tarefas;
+    }
 }

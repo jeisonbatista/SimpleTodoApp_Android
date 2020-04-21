@@ -82,7 +82,7 @@ public class NovaTarefaActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        
+
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == 100) {
                 ImageView fotoDocumento = findViewById(R.id.imageView);

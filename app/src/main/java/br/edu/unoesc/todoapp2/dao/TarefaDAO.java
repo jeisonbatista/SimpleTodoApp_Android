@@ -14,12 +14,12 @@ import br.edu.unoesc.todoapp2.entidades.Tarefa;
 public class TarefaDAO extends SQLiteOpenHelper {
 
     public TarefaDAO(Context context){
-        super(context, "todoApp_db", null, 2);
+        super(context, "todoApp_db", null, 3);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE Tarefa(ID INTEGER PRIMARY KEY, TITULO TEXT NOT NULL, DESCRIACAO TEXT, URGENTE INTEGER, FINALIZADA INTEGER);";
+        String sql = "CREATE TABLE Tarefa(ID INTEGER PRIMARY KEY, TITULO TEXT NOT NULL, DESCRIACAO TEXT, URGENTE INTEGER, FINALIZADA INTEGER, DOCUMENTO TEXT);";
         db.execSQL(sql);
     }
 
@@ -38,6 +38,7 @@ public class TarefaDAO extends SQLiteOpenHelper {
         valores.put("DESCRIACAO", tarefa.getDescricao());
         valores.put("URGENTE", tarefa.isUrgente() ? "1" : "0");
         valores.put("FINALIZADA", "0");
+        valores.put("DOCUMENTO", tarefa.getDocumento());
 
         db.insert("Tarefa", null, valores);
     }
@@ -54,6 +55,7 @@ public class TarefaDAO extends SQLiteOpenHelper {
             tarefa.setTitulo(c.getString(c.getColumnIndex("TITULO")));
             tarefa.setDescricao(c.getString(c.getColumnIndex("DESCRIACAO")));
             tarefa.setUrgente(c.getString(c.getColumnIndex("URGENTE")).equals("0") ? false : true);
+            tarefa.setDocumento(c.getString(c.getColumnIndex("DOCUMENTO")));
             tarefas.add(tarefa);
         }
         c.close();
@@ -75,6 +77,7 @@ public class TarefaDAO extends SQLiteOpenHelper {
         valores.put("DESCRIACAO", tarefa.getDescricao());
         valores.put("URGENTE", tarefa.isUrgente() ? "1" : "0");
         valores.put("FINALIZADA", tarefa.isFinalizada() ? "1" : "0");
+        valores.put("DOCUMENTO", tarefa.getDocumento());
         String[] parametros = {tarefa.getId().toString()};
 
         db.update("Tarefa", valores, "id = ?", parametros);

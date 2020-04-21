@@ -9,6 +9,7 @@ public class Tarefa implements Serializable {
     private String descricao;
     private boolean urgente;
     private boolean finalizada;
+    private String documento;
 
     public Long getId() {
         return id;
@@ -48,6 +49,14 @@ public class Tarefa implements Serializable {
 
     public void setFinalizada(boolean finalizada) {
         this.finalizada = finalizada;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
     }
 
     @Override
